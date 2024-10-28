@@ -11,7 +11,7 @@ function calculateTotal() {
     totalSpan.innerText = totalValue.toFixed(2);
   }
   else{
-    totalValue = String("The tip is abusive");
+    totalValue = "The tip is abusive";
     totalSpan.innerText= totalValue;
   }
     
