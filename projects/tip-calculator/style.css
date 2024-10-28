@@ -30,7 +30,6 @@ input {
 }
 
 button {
-  background-color: #4caf50;
   color: white;
   padding: 10px;
   border: none;
@@ -42,8 +41,20 @@ button {
   transition: background-color 0.2s ease;
 }
 
-button:hover {
-  background-color: #45a049;
+.btn-success {
+  background-color: #4caf50;
+}
+
+.btn-success:hover {
+  background-color: #021f02;
+}
+
+.btn-danger {
+  background-color: #890303;
+}
+
+.btn-danger:hover {
+  background-color: #220202;
 }
 
 #total {
