@@ -70,6 +70,10 @@ button {
   background-color: #220202;
 }
 
+.error-highlight {
+  color: #890303;
+}
+
 #total {
   font-size: 24px;
   font-weight: bold;

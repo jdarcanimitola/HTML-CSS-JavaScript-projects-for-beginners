@@ -43,9 +43,13 @@ function calculateTotal() {
     const totalValue = billValue * (1 + tipValue / 100);
     finalTipSpan.innerText = finalTipValue.toFixed(2);
     totalSpan.innerText = totalValue.toFixed(2);
+    finalTipSpan.classList.remove("error-highlight");
+    totalSpan.classList.remove("error-highlight");
   } else {
     finalTipSpan.innerText = "The tip is abusive";
     totalSpan.innerText = "The tip is abusive";
+    finalTipSpan.classList.add("error-highlight");
+    totalSpan.classList.add("error-highlight");
   }
 }
 
