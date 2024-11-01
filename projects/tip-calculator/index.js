@@ -1,12 +1,5 @@
-const productOneInput = document.getElementById("product-one");
-const priceOneInput = document.getElementById("price-one");
-const unitOneInput = document.getElementById("unit-one");
-const moneyOneSpan = document.getElementById("money-one");
-
-const productTwoInput = document.getElementById("product-two");
-const priceTwoInput = document.getElementById("price-two");
-const unitTwoInput = document.getElementById("unit-two");
-const moneyTwoSpan = document.getElementById("money-two");
+const productTable = document.getElementById("product-table");
+const productRows = productTable.children;
 
 const tipInput = document.getElementById("tip");
 
@@ -17,30 +10,29 @@ const subtotalSpan = document.getElementById("subtotal");
 const finalTipSpan = document.getElementById("final-tip");
 const totalSpan = document.getElementById("total");
 
-function calculateFirst() {
-  const priceOneValue = priceOneInput.value;
-  const unitOneValue = unitOneInput.value;
-  const priceOneTotalValue = priceOneValue * unitOneValue;
-  moneyOneSpan.innerText = priceOneTotalValue;
+function calculateRow(row) {
+  const priceValue = productRows[row].children[1].firstElementChild.value;
+  const unitValue = productRows[row].children[2].firstElementChild.value;
+  const totalValue = priceValue * unitValue;
+  const moneySpan = productRows[row].children[3].firstElementChild;
+  moneySpan.innerText = totalValue;
 }
 
 function calculateTotal() {
-  const priceOneValue = priceOneInput.value;
-  const unitOneValue = unitOneInput.value;
-  const priceOneTotalValue = priceOneValue * unitOneValue;
+  let subTotal = 0;
+  for (let row = 0; row < productRows.length; row++) {
+    const priceValue = productRows[row].children[1].firstElementChild.value;
+    const unitValue = productRows[row].children[2].firstElementChild.value;
+    subTotal += priceValue * unitValue;
+  }
 
-  const priceTwoValue = priceTwoInput.value;
-  const unitTwoValue = unitTwoInput.value;
-  const priceTwoTotalValue = priceTwoValue * unitTwoValue;
-
-  const billValue = priceOneTotalValue + priceTwoTotalValue;
-  subtotalSpan.innerText = billValue;
+  subtotalSpan.innerText = subTotal;
 
   const tipValue = tipInput.value;
-  232;
+
   if (tipValue < 20) {
-    const finalTipValue = (billValue * tipValue) / 100;
-    const totalValue = billValue * (1 + tipValue / 100);
+    const finalTipValue = (subTotal * tipValue) / 100;
+    const totalValue = subTotal * (1 + tipValue / 100);
     finalTipSpan.innerText = finalTipValue.toFixed(2);
     totalSpan.innerText = totalValue.toFixed(2);
     finalTipSpan.classList.remove("error-highlight");
@@ -54,24 +46,25 @@ function calculateTotal() {
 }
 
 function cleanTotal() {
-  productOneInput.value = null;
-  priceOneInput.value = null;
-  unitOneInput.value = null;
-  moneyOneSpan.innerText = "";
-
-  productTwoInput.value = null;
-  priceTwoInput.value = null;
-  unitTwoInput.value = null;
-  moneyTwoSpan.innerText = "";
+  for (let row = 0; row < productRows.length; row++) {
+    productRows[row].children[0].firstElementChild.value = null;
+    productRows[row].children[1].firstElementChild.value = null;
+    productRows[row].children[2].firstElementChild.value = null;
+    productRows[row].children[3].firstElementChild.innerText = null;
+  }
 
   tipInput.value = null;
-  subtotalSpan.innerText = "";
-  finalTipSpan.innerText = "";
-  totalSpan.innerText = "";
+  subtotalSpan.innerText = null;
+  finalTipSpan.innerText = null;
+  totalSpan.innerText = null;
 }
 
-priceOneInput.addEventListener("focusout", calculateFirst);
-unitOneInput.addEventListener("focusout", calculateFirst);
+for (let row = 0; row < productRows.length; row++) {
+  const priceInput = productRows[row].children[1].firstElementChild;
+  const unitInput = productRows[row].children[2].firstElementChild;
+  priceInput.addEventListener("focusout", () => calculateRow(row));
+  unitInput.addEventListener("focusout", () => calculateRow(row));
+}
 
 btnCalculate.addEventListener("click", calculateTotal);
 btnClean.addEventListener("click", cleanTotal);

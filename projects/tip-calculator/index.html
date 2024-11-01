@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tip Calculator</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container">
-        <h1>Tip Calculator</h1>
-        <p>Enter the bill amount and tip percentage to calculate the total.</p>
-        <table>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Unit</th>
-              <th>Money</th>
-            </tr>
-            <tr>
-              <td>
-<input type="text" id="product-one">
-              </td>
-              <td>
-<input type="number" id="price-one">
-              </td>
-              <td>
-                <input type="number" id="unit-one">
-              </td>
-              <td>
-                <span id="money-one"></span>
-              </td>
-            </tr>
-            <tr>
-              <td>
-<input type="text" id="product-two">
-              </td>
-              <td>
-<input type="number" id="price-two">
-              </td>
-              <td>
-                <input type="number" id="unit-two">
-              </td>
-              <td>
-                <span id="money-two"></span>
-              </td>
-            </tr>
-          </table>
-        <br/>
-        <label for="tip">Tip percentage:</label>
-        <input type="number" id="tip">
-        <br/>
-        <button class="btn-success" id="calculate">Calculate</button>
-        <button class="btn-danger" id="clean">Clean</button>
-        <br/>
-        <label for="subtotal">Subtotal:</label>
-        <span id="subtotal"></span>
-        <br/>
-        <label for="final-tip">Tip:</label>
-        <span id="final-tip"></span>
-        <br/>
-        <label for="total">Total:</label>
-        <span id="total"></span>
-
+      <h1>Tip Calculator</h1>
+      <p>Enter the bill amount and tip percentage to calculate the total.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Unit</th>
+            <th>Money</th>
+          </tr>
+        </thead>
+        <tbody id="product-table">
+          <tr>
+            <td>
+              <input type="text" />
+            </td>
+            <td>
+              <input type="number" />
+            </td>
+            <td>
+              <input type="number" />
+            </td>
+            <td>
+              <span></span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input type="text" />
+            </td>
+            <td>
+              <input type="number" />
+            </td>
+            <td>
+              <input type="number" />
+            </td>
+            <td>
+              <span></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <label for="tip">Tip percentage:</label>
+      <input type="number" id="tip" />
+      <br />
+      <button class="btn-success" id="calculate">Calculate</button>
+      <button class="btn-danger" id="clean">Clean</button>
+      <br />
+      <label for="subtotal">Subtotal:</label>
+      <span id="subtotal"></span>
+      <br />
+      <label for="final-tip">Tip:</label>
+      <span id="final-tip"></span>
+      <br />
+      <label for="total">Total:</label>
+      <span id="total"></span>
     </div>
     <script src="index.js"></script>
-</body>
+  </body>
 </html>
