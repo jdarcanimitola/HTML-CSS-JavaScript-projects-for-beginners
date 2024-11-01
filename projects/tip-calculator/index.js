@@ -1,6 +1,7 @@
 const productTable = document.getElementById("product-table");
 const productRows = productTable.children;
 
+const btnAddProduct = document.getElementById("add-product");
 const tipInput = document.getElementById("tip");
 
 const btnCalculate = document.getElementById("calculate");
@@ -9,6 +10,35 @@ const btnClean = document.getElementById("clean");
 const subtotalSpan = document.getElementById("subtotal");
 const finalTipSpan = document.getElementById("final-tip");
 const totalSpan = document.getElementById("total");
+
+let totalRows = 0;
+
+function addProduct() {
+  totalRows++;
+  const currentRow = totalRows;
+  const htmlString = `
+            <td>
+              <input type="text" />
+            </td>
+            <td>
+              <input type="number" />
+            </td>
+            <td>
+              <input type="number" />
+            </td>
+            <td>
+              <span></span>
+            </td>
+        `;
+
+  const row = document.createElement("tr");
+  row.innerHTML = htmlString;
+  const priceInput = row.children[1].firstElementChild;
+  const unitInput = row.children[2].firstElementChild;
+  priceInput.addEventListener("focusout", () => calculateRow(currentRow));
+  unitInput.addEventListener("focusout", () => calculateRow(currentRow));
+  productTable.appendChild(row);
+}
 
 function calculateRow(row) {
   const priceValue = productRows[row].children[1].firstElementChild.value;
@@ -66,5 +96,6 @@ for (let row = 0; row < productRows.length; row++) {
   unitInput.addEventListener("focusout", () => calculateRow(row));
 }
 
+btnAddProduct.addEventListener("click", addProduct);
 btnCalculate.addEventListener("click", calculateTotal);
 btnClean.addEventListener("click", cleanTotal);
