@@ -11,11 +11,7 @@ const subtotalSpan = document.getElementById("subtotal");
 const finalTipSpan = document.getElementById("final-tip");
 const totalSpan = document.getElementById("total");
 
-let totalRows = 0;
-
-function addProduct() {
-  totalRows++;
-  const currentRow = totalRows;
+function addRow() {
   const htmlString = `
             <td>
               <input type="text" />
@@ -29,22 +25,32 @@ function addProduct() {
             <td>
               <span></span>
             </td>
+            <td>
+              <button class="btn-danger">Remove</button>
+            </td>
         `;
 
   const row = document.createElement("tr");
   row.innerHTML = htmlString;
   const priceInput = row.children[1].firstElementChild;
   const unitInput = row.children[2].firstElementChild;
-  priceInput.addEventListener("focusout", () => calculateRow(currentRow));
-  unitInput.addEventListener("focusout", () => calculateRow(currentRow));
+  const btnRemove = row.children[4].firstElementChild;
+  priceInput.addEventListener("focusout", () => calculateRow(row));
+  unitInput.addEventListener("focusout", () => calculateRow(row));
+  btnRemove.addEventListener("click", () => removeRow(row));
+
   productTable.appendChild(row);
 }
 
+function removeRow(row) {
+  productTable.removeChild(row);
+}
+
 function calculateRow(row) {
-  const priceValue = productRows[row].children[1].firstElementChild.value;
-  const unitValue = productRows[row].children[2].firstElementChild.value;
+  const priceValue = row.children[1].firstElementChild.value;
+  const unitValue = row.children[2].firstElementChild.value;
   const totalValue = priceValue * unitValue;
-  const moneySpan = productRows[row].children[3].firstElementChild;
+  const moneySpan = row.children[3].firstElementChild;
   moneySpan.innerText = totalValue;
 }
 
@@ -89,13 +95,16 @@ function cleanTotal() {
   totalSpan.innerText = null;
 }
 
-for (let row = 0; row < productRows.length; row++) {
-  const priceInput = productRows[row].children[1].firstElementChild;
-  const unitInput = productRows[row].children[2].firstElementChild;
+for (let rowNumber = 0; rowNumber < productRows.length; rowNumber++) {
+  const row = productRows[rowNumber];
+  const priceInput = row.children[1].firstElementChild;
+  const unitInput = row.children[2].firstElementChild;
+  const btnRemove = row.children[4].firstElementChild;
   priceInput.addEventListener("focusout", () => calculateRow(row));
   unitInput.addEventListener("focusout", () => calculateRow(row));
+  btnRemove.addEventListener("click", () => removeRow(row));
 }
 
-btnAddProduct.addEventListener("click", addProduct);
+btnAddProduct.addEventListener("click", addRow);
 btnCalculate.addEventListener("click", calculateTotal);
 btnClean.addEventListener("click", cleanTotal);
