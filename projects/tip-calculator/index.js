@@ -79,6 +79,17 @@ function calculateTotal() {
     finalTipSpan.classList.add("error-highlight");
     totalSpan.classList.add("error-highlight");
   }
+
+  const report = { products: [], tip: tipValue };
+
+  for (let row = 0; row < productRows.length; row++) {
+    const nameValue = productRows[row].children[0].firstElementChild.value;
+    const priceValue = productRows[row].children[1].firstElementChild.value;
+    const unitValue = productRows[row].children[2].firstElementChild.value;
+    const product = { name: nameValue, price: priceValue, unit: unitValue };
+    report.products.push(product);
+  }
+  console.log(report);
 }
 
 function cleanTotal() {
