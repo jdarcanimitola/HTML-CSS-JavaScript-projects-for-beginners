@@ -80,12 +80,16 @@ function calculateTotal() {
     totalSpan.classList.add("error-highlight");
   }
 
-  const report = { products: [], tip: tipValue };
+  const report = { products: [], tip: parseFloat(tipValue) };
 
   for (let row = 0; row < productRows.length; row++) {
     const nameValue = productRows[row].children[0].firstElementChild.value;
-    const priceValue = productRows[row].children[1].firstElementChild.value;
-    const unitValue = productRows[row].children[2].firstElementChild.value;
+    const priceValue = parseFloat(
+      productRows[row].children[1].firstElementChild.value
+    );
+    const unitValue = parseInt(
+      productRows[row].children[2].firstElementChild.value
+    );
     const product = { name: nameValue, price: priceValue, unit: unitValue };
     report.products.push(product);
   }
