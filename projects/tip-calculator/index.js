@@ -93,8 +93,27 @@ function calculateTotal() {
     const product = { name: nameValue, price: priceValue, unit: unitValue };
     report.products.push(product);
   }
-  console.log(report);
+  sendReport(report);
 }
+
+const sendReport = (report) => {
+  const url = "http://127.0.0.1:8000/report/";
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(report),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+};
 
 function cleanTotal() {
   for (let row = 0; row < productRows.length; row++) {
