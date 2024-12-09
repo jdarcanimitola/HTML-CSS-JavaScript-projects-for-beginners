@@ -80,31 +80,30 @@ function calculateTotal() {
     totalSpan.classList.add("error-highlight");
   }
 
-  const report = { products: [], tip: parseFloat(tipValue) };
+  const order = { products: [], tip: parseFloat(tipValue) };
 
   for (let row = 0; row < productRows.length; row++) {
-    const nameValue = productRows[row].children[0].firstElementChild.value;
-    const priceValue = parseFloat(
-      productRows[row].children[1].firstElementChild.value
+    const productId = parseInt(
+      productRows[row].children[0].firstElementChild.value
     );
-    const unitValue = parseInt(
+    const units = parseInt(
       productRows[row].children[2].firstElementChild.value
     );
-    const product = { name: nameValue, price: priceValue, unit: unitValue };
-    report.products.push(product);
+    const product = { productId, units };
+    order.products.push(product);
   }
-  sendReport(report);
+  sendOrder(order);
 }
 
-const sendReport = (report) => {
-  const url = "http://127.0.0.1:8000/report/";
+const sendOrder = (order) => {
+  const url = "http://127.0.0.1:8000/order/";
 
   fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(report),
+    body: JSON.stringify(order),
   })
     .then((response) => response.json())
     .then((data) => {
